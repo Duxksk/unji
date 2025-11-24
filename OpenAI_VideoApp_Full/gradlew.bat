@@ -1,55 +1,15 @@
 @rem
-@rem Gradle startup script for Windows
+@rem Copyright 2015-2023 
+@rem
+@rem Licensed under the Apache License, Version 2.0
 @rem
 
-@if "%DEBUG%" == "" @echo off
-@setlocal
-
-set DIRNAME=%~dp0
-if "%DIRNAME%" == "" set DIRNAME=.
-set APP_BASE_NAME=%~n0
-set APP_HOME=%DIRNAME%
-
-@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+@echo off
 set DEFAULT_JVM_OPTS="-Xmx64m" "-Xms64m"
 
-@rem Find java.exe
-if defined JAVA_HOME goto findJavaFromJavaHome
+set CLASSPATH=%~dp0\gradle\wrapper\gradle-wrapper.jar
 
-set JAVA_EXE=java.exe
-%JAVA_EXE% -version >NUL 2>&1
-if %ERRORLEVEL% equ 0 goto init
+set CMD_LINE_ARGS=%*
 
-echo.
-echo ERROR: JAVA_HOME is not set and no 'java' command could be found in your PATH.
-echo.
-exit /b 1
-
-:findJavaFromJavaHome
-set JAVA_HOME=%JAVA_HOME:"=%
-set JAVA_EXE=%JAVA_HOME%\\bin\\java.exe
-
-if exist "%JAVA_EXE%" goto init
-
-echo.
-echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
-echo.
-exit /b 1
-
-:init
-@rem Get command-line arguments, handling Windows variants
-set CMD_LINE_ARGS=
-
-:parseArgs
-if "%~1"=="" goto doneArgs
-set CMD_LINE_ARGS=%CMD_LINE_ARGS% "%~1"
-shift
-goto parseArgs
-:doneArgs
-
-set CLASSPATH=%APP_HOME%\\gradle\\wrapper\\gradle-wrapper.jar
-
-@rem Execute Gradle
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
-
-:end
+"%JAVA_HOME%\bin\java.exe" %DEFAULT_JVM_OPTS% -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %CMD_LINE_ARGS%
+if %ERRORLEVEL% NEQ 0 exit /b %ERRORLEVEL%
